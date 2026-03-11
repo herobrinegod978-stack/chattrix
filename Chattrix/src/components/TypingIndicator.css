@@ -1,0 +1,26 @@
+.typing-indicator-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  padding: 4px 16px;
+}
+
+.typing-indicator {
+  background: var(--bg-bubble-received);
+  border-radius: 12px 12px 12px 0;
+  padding: 12px 16px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.typing-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.dot-1 { animation: typingBounce 1.2s infinite 0.0s; }
+.dot-2 { animation: typingBounce 1.2s infinite 0.2s; }
+.dot-3 { animation: typingBounce 1.2s infinite 0.4s; }

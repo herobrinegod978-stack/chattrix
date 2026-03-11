@@ -1,0 +1,174 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-primary);
+  padding: 20px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--bg-primary);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-xl);
+  padding: 40px 32px;
+  animation: scaleIn 0.3s ease;
+  border: 1px solid var(--border-color);
+}
+
+.login-title {
+  font-family: var(--font-display);
+  font-size: 36px;
+  text-align: center;
+  color: var(--color-primary);
+  margin-bottom: 4px;
+}
+
+.login-subtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  margin-bottom: 28px;
+  font-size: 14px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.login-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  color: var(--text-primary);
+  background: var(--bg-input);
+  transition: border-color 0.2s;
+}
+
+.login-input:focus {
+  border-color: var(--color-primary);
+}
+
+.login-input.error {
+  border-color: var(--color-red);
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper .login-input {
+  padding-right: 44px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  padding: 4px;
+}
+
+.field-error {
+  font-size: 12px;
+  color: var(--color-red);
+  padding-left: 4px;
+}
+
+.auth-error {
+  background: #FEE2E2;
+  color: #DC2626;
+  padding: 10px 14px;
+  border-radius: var(--border-radius);
+  font-size: 13px;
+  text-align: center;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: var(--border-radius);
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.2s;
+}
+
+.login-btn.primary {
+  background: var(--color-primary);
+  color: var(--color-black);
+}
+
+.login-btn.primary:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+
+.login-btn.primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.login-btn.google {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1.5px solid var(--border-color);
+}
+
+.login-btn.google:hover {
+  background: var(--color-gray-light);
+}
+
+.spinner {
+  animation: spin 0.8s linear infinite;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-color);
+}
+
+.divider span {
+  padding: 0 12px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.toggle-auth {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.toggle-link {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.toggle-link:hover {
+  text-decoration: underline;
+}

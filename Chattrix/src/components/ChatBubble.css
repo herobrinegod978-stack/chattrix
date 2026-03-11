@@ -1,0 +1,98 @@
+.chat-bubble-wrapper {
+  display: flex;
+  margin: 2px 12px;
+  position: relative;
+}
+.chat-bubble-wrapper.own {
+  justify-content: flex-end;
+}
+.chat-bubble-wrapper.other {
+  justify-content: flex-start;
+}
+
+.chat-bubble {
+  max-width: 75%;
+  padding: 8px 12px;
+  position: relative;
+  word-wrap: break-word;
+  user-select: text;
+}
+
+.chat-bubble.sent {
+  background: var(--bg-bubble-sent);
+  color: var(--text-on-bubble-sent);
+  border-radius: 12px 12px 0 12px;
+}
+
+.chat-bubble.received {
+  background: var(--bg-bubble-received);
+  color: var(--text-on-bubble-received);
+  border-radius: 12px 12px 12px 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.chat-bubble.emoji-only {
+  background: transparent !important;
+  box-shadow: none !important;
+  font-size: 32px;
+  padding: 4px 8px;
+}
+
+.chat-bubble.deleted {
+  opacity: 0.7;
+}
+
+.deleted-text {
+  font-style: italic;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.bubble-content {
+  display: inline;
+  line-height: 1.4;
+}
+
+.bubble-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  float: right;
+  margin: 4px 0 -4px 8px;
+}
+
+.bubble-time {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.bubble-status {
+  display: flex;
+  align-items: center;
+}
+
+.bubble-status.sent {
+  color: var(--text-muted);
+}
+
+.bubble-status.seen {
+  color: var(--color-blue);
+}
+
+/* Smoke particles */
+.smoke-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.smoke-particle {
+  position: absolute;
+  top: 50%;
+  font-size: 8px;
+  opacity: 0;
+}

@@ -1,0 +1,37 @@
+.avatar-container {
+  position: relative;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.avatar-img {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatar-fallback {
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-family: var(--font-body);
+}
+
+.avatar-status-dot {
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+  border-radius: 50%;
+  border: 2px solid var(--bg-primary);
+}
+
+.avatar-status-dot.online {
+  background-color: var(--color-green);
+}
+
+.avatar-status-dot.offline {
+  background-color: var(--color-gray);
+}
