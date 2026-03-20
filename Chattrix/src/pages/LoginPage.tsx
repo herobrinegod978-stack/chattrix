@@ -11,11 +11,12 @@ export default function LoginPage() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
   const [emailError, setEmailError] = useState('');
 
-  const isValid = email.trim() !== '' && validateEmail(email) && password.length >= 6;
+  const isValid = email.trim() !== '' && validateEmail(email) && password.length >= 6 && (!isSignUp || phone.trim().length >= 10);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,8 +29,16 @@ export default function LoginPage() {
     }
 
     if (isSignUp) {
-      const data = await signUp(email, password);
-      if (data) navigate('/home', { replace: true });
+      if (!phone.trim()) {
+        setEmailError('Phone number is required');
+        return;
+      }
+      const data = await signUp(email, password, phone);
+      if (data) {
+        // Since trigger auto-confirms, we can auto-login
+        const loginData = await signIn(email, password);
+        if (loginData) navigate('/home', { replace: true });
+      }
     } else {
       const data = await signIn(email, password);
       if (data) navigate('/home', { replace: true });
@@ -62,6 +71,20 @@ export default function LoginPage() {
             />
             {emailError && <span className="field-error">{emailError}</span>}
           </div>
+
+          {isSignUp && (
+            <div className="input-group">
+              <input
+                id="phone-input"
+                type="tel"
+                value={phone}
+                onChange={e => { setPhone(e.target.value); clearError(); }}
+                placeholder="Enter your phone number"
+                className="login-input"
+                autoComplete="tel"
+              />
+            </div>
+          )}
 
           <div className="input-group">
             <div className="password-wrapper">

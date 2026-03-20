@@ -18,7 +18,7 @@ export default function ProfilePage() {
 
   const [editing, setEditing] = useState(false);
   const [name, setName] = useState(user?.name || '');
-  const [phone, setPhone] = useState(user?.phone || '');
+  const [phone, setPhone] = useState(user?.phone_number || '');
   const [dob, setDob] = useState(user?.dob || '');
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -30,17 +30,28 @@ export default function ProfilePage() {
       alert('Name is required');
       return;
     }
+    
+    // Validate phone if edited
+    const phoneTrimmed = phone.trim();
+    if (!/^[0-9]{10}$/.test(phoneTrimmed)) {
+      alert('Please enter a valid 10-digit phone number');
+      return;
+    }
+
     setSaving(true);
     try {
-      await supabase.from('users').update({
+      const { error } = await supabase.from('users').update({
         name: name.trim(),
-        phone: phone.trim() || null,
+        phone_number: phoneTrimmed,
         dob: dob || null,
       }).eq('id', user.id);
+
+      if (error) throw error;
       await refreshUser();
       setEditing(false);
     } catch (err) {
       console.error('Save error:', err);
+      alert('Failed to save profile changes');
     }
     setSaving(false);
   };
@@ -122,17 +133,17 @@ export default function ProfilePage() {
           </div>
 
           <div className="field-group">
-            <label>Phone</label>
+            <label>Phone Number</label>
             {editing ? (
               <input
                 type="tel"
                 value={phone}
                 onChange={e => setPhone(e.target.value)}
                 className="profile-input"
-                placeholder="Your phone number"
+                placeholder="Your 10-digit phone number"
               />
             ) : (
-              <p className="field-value">{user?.phone || 'Not set'}</p>
+              <p className="field-value">{user?.phone_number || 'Not set'}</p>
             )}
           </div>
 

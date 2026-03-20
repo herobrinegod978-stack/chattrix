@@ -11,18 +11,20 @@ export function useChats() {
     setLoading(true);
 
     try {
-      // Look up user by phone
+      // Look up user by phone_number
       const { data: foundUser, error: findError } = await supabase
         .from('users')
-        .select('id, name, phone, dp_url')
-        .eq('phone', phone)
+        .select('id, name, phone_number, dp_url')
+        .eq('phone_number', phone)
         .single();
 
       if (findError || !foundUser) {
+        console.log('User not found by phone:', phone);
         return null; // User not found
       }
 
       if (foundUser.id === user.id) {
+        console.log('Cannot chat with self');
         return null; // Can't chat with yourself
       }
 
@@ -39,8 +41,14 @@ export function useChats() {
         .select()
         .single();
 
-      if (chatError) { console.error('Create chat error:', chatError); return null; }
+      if (chatError) { 
+        console.error('Create chat error:', chatError); 
+        return null; 
+      }
       return chat?.id || null;
+    } catch (err) {
+      console.error('Unexpected error in createChat:', err);
+      return null;
     } finally {
       setLoading(false);
     }

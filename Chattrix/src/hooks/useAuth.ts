@@ -6,11 +6,11 @@ export function useAuth() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSignUp = useCallback(async (email: string, password: string) => {
+  const handleSignUp = useCallback(async (email: string, password: string, phone: string) => {
     setLoading(true);
     setError(null);
     try {
-      const data = await signUpWithEmail(email, password);
+      const data = await signUpWithEmail(email, password, phone);
       return data;
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Sign up failed';

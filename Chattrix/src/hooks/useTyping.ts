@@ -5,8 +5,8 @@ import { useAuthContext } from '../context/AuthContext';
 export function useTyping(chatId: string) {
   const { user } = useAuthContext();
   const [isOtherTyping, setIsOtherTyping] = useState(false);
-  const typingTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
-  const channelRef = useRef<ReturnType<typeof supabase.channel>>();
+  const typingTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const channelRef = useRef<ReturnType<typeof supabase.channel> | undefined>(undefined);
 
   useEffect(() => {
     if (!chatId || !user) return;
@@ -24,7 +24,7 @@ export function useTyping(chatId: string) {
         );
         setIsOtherTyping(otherTyping);
       })
-      .subscribe(async (status) => {
+      .subscribe(async (status: any) => {
         if (status === 'SUBSCRIBED') {
           await channel.track({ typing: false });
         }

@@ -82,7 +82,7 @@ export function useMessages(chatId: string) {
         schema: 'public',
         table: 'messages',
         filter: `chat_id=eq.${chatId}`,
-      }, (payload) => {
+      }, (payload: any) => {
         const newMsg = payload.new as Message;
         setMessages(prev => {
           if (prev.find(m => m.id === newMsg.id)) return prev;
@@ -102,7 +102,7 @@ export function useMessages(chatId: string) {
         schema: 'public',
         table: 'messages',
         filter: `chat_id=eq.${chatId}`,
-      }, (payload) => {
+      }, (payload: any) => {
         const updated = payload.new as Message;
         setMessages(prev =>
           prev.map(m => m.id === updated.id ? updated : m)

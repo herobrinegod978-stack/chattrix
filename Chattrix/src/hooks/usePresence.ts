@@ -28,7 +28,7 @@ export function usePresence() {
       .on('presence', { event: 'sync' }, () => {
         // Presence synced
       })
-      .subscribe(async (status) => {
+      .subscribe(async (status: any) => {
         if (status === 'SUBSCRIBED') {
           await channel.track({
             user_id: user.id,
@@ -39,7 +39,7 @@ export function usePresence() {
 
     // Set offline on unload
     const handleUnload = () => {
-      navigator.sendBeacon && setOnline(false);
+      setOnline(false);
     };
     window.addEventListener('beforeunload', handleUnload);
 

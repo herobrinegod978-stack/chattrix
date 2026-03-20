@@ -27,20 +27,28 @@ export default function HomePage() {
     if (!search.trim()) return true;
     const q = search.toLowerCase();
     const name = chat.other_user?.name?.toLowerCase() || '';
-    const chatPhone = chat.other_user?.phone || '';
+    const chatPhone = chat.other_user?.phone_number || '';
     return name.includes(q) || chatPhone.includes(q);
   });
 
   const handleNewChat = async () => {
     setNewChatError('');
-    if (!phone.trim()) return;
-    const chatId = await createChat(phone.trim());
+    const phoneTrimmed = phone.trim();
+    if (!phoneTrimmed) return;
+    
+    // Quick validation
+    if (!/^[0-9]{10}$/.test(phoneTrimmed)) {
+      setNewChatError('Enter a valid 10-digit phone number');
+      return;
+    }
+
+    const chatId = await createChat(phoneTrimmed);
     if (chatId) {
       setShowNewChat(false);
       setPhone('');
       navigate(`/chat/${chatId}`);
     } else {
-      setNewChatError('Sorry, user not found in Chattrix');
+      setNewChatError('User not found or unavailable in Chattrix');
     }
   };
 
@@ -103,7 +111,7 @@ export default function HomePage() {
               <div className="chat-info">
                 <div className="chat-top-row">
                   <span className="chat-name">
-                    {chat.other_user?.name || chat.other_user?.phone || chat.other_user?.email || 'Unknown'}
+                    {chat.other_user?.name || chat.other_user?.phone_number || chat.other_user?.email || 'Unknown'}
                   </span>
                   {chat.last_message && (
                     <span className="chat-time">{formatChatListTime(chat.last_message.created_at)}</span>

@@ -36,8 +36,8 @@ export default function ChatPage() {
         .from('chats')
         .select(`
           user1_id, user2_id,
-          user1:users!user1_id(id, name, phone, dp_url, is_online, last_login, email),
-          user2:users!user2_id(id, name, phone, dp_url, is_online, last_login, email)
+          user1:users!user1_id(id, name, phone_number, dp_url, is_online, last_login, email),
+          user2:users!user2_id(id, name, phone_number, dp_url, is_online, last_login, email)
         `)
         .eq('id', chatId!)
         .single();
@@ -101,7 +101,7 @@ export default function ChatPage() {
         />
         <div className="chat-header-info">
           <span className="chat-header-name">
-            {otherUser?.name || otherUser?.phone || otherUser?.email || 'Loading...'}
+            {otherUser?.name || otherUser?.phone_number || otherUser?.email || 'Loading...'}
           </span>
           <span className="chat-header-status">
             {otherUser?.is_online
